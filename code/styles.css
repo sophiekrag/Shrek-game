@@ -1,0 +1,53 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'RocknRoll One', sans-serif;
+    line-height: 2rem;
+    width: 60%;
+    margin: auto;
+    background-color: rgb(105,131,57);
+    
+}
+
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+}
+
+.head-img {
+    width: 20%;
+}
+
+.instruction {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 5px solid black;
+    padding: 5%;
+}
+
+.instruction-title {
+    margin-bottom: 20px;
+}
+
+
+#btn-start {
+    font-family:'RocknRoll One', sans-serif; 
+    font-size: 1.9rem;
+    width: 200px;
+    height: 75px;
+    cursor: pointer;
+    margin: 30px;
+    border-radius: 12px;
+}
+
+.game-canvas {
+    margin: 20px;
+    border: 1px solid blue;
+}
