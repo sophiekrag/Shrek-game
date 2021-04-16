@@ -1,15 +1,14 @@
 const startButton = document.getElementById('btn-start');
 
 startButton.addEventListener("click", () => {
-    alert("hello")
     greateCanvas()
-    animation()
     animateShrek()
 })
 
 
 const canvas = document.createElement('canvas');
 const ctx = canvas.getContext('2d')
+
 const greateCanvas = () => {
     canvas.id = 'gameCanvas';
     canvas.width = '850';
@@ -23,54 +22,73 @@ const greateCanvas = () => {
 const keys = [];
 
 const playerShrek = {
-    x: 0,
-    y: 0,
+    x: 425,
+    y: 400,
     width: 70,
     height: 90,
     speed: 9,
-    moving: false
+    moving: false,
 }
 
-const playerImg = new Image();
-playerImg.src = "..//images/Shrek.png"
 
-function animateShrek() {
-    ctx.drawImage(playerImg, 425, 400, playerShrek.width, playerShrek.height)
+const animateShrek = () => {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const playerImg = new Image();
+    playerImg.src = "..//images/Shrek.png"
+    ctx.drawImage(playerImg, playerShrek.x, playerShrek.y, playerShrek.width, playerShrek.height)
     requestAnimationFrame(animateShrek)
 }
 
-
-
-
-
-
-
-
-
-let x = Math.random() * canvas.width;
-let y = Math.random() * canvas.height;
-let dx = (Math.random() - 0.5) * 10;
-let dy = (Math.random() - 0.5) * 10;
-let radius = 30;
-
-function animation() {
-    requestAnimationFrame(animation);
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    console.log('works')
-
-    ctx.beginPath();
-    ctx.arc(x, y, radius, 0, Math.PI * 2, false)
-    ctx.strokeStyle = 'black'
-    ctx.stroke();
-
-    if (x + radius > canvas.width || x - radius < (0)) {
-        dx = -dx
+const move = e => {
+    if (e.keyCode === 37) {
+        playerShrek.x -= playerShrek.speed;
     }
-
-    if (y + radius > canvas.height || y - radius < (0)) {
-        dy = -dy
+    if (e.keyCode === 38) {
+        playerShrek.y -= playerShrek.speed;
     }
-
-    x += dx
-    y += dy
+    if (e.keyCode === 39) {
+        playerShrek.x += playerShrek.speed;
+    }
+    if (e.keyCode === 40) {
+        playerShrek.y += playerShrek.speed;
+    }
 }
+
+document.addEventListener('keydown', move)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// document.addEventListener('keydown', (event) => {
+//     if (event.key === 37){
+//             playerShrek.x -= playerShrek.speed;
+//             console.log('moving left')
+//     }
+//     if (event.key === 38) {
+//             playerShrek.y -= playerShrek.speed;
+//     }
+//     if (event.key === 39){
+//             playerShrek.x += playerShrek.speed;
+//     }
+//     if (event.key === 40){
+//             playerShrek.y += playerShrek.speed;
+//     }
+//     animateShrek()
+//     console.log('move bitch')
+// })
