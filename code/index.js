@@ -19,14 +19,12 @@ const greateCanvas = () => {
     console.log('hello')
 }
 
-const keys = [];
-
 const playerShrek = {
     x: 425,
     y: 400,
     width: 70,
     height: 90,
-    speed: 9,
+    speed: 10,
     moving: false,
 }
 
@@ -40,16 +38,16 @@ const animateShrek = () => {
 }
 
 const move = e => {
-    if (e.keyCode === 37) {
+    if (e.keyCode === 37 && playerShrek.x > 0) {
         playerShrek.x -= playerShrek.speed;
     }
-    if (e.keyCode === 38) {
+    if (e.keyCode === 38 && playerShrek.y > 0) {
         playerShrek.y -= playerShrek.speed;
     }
-    if (e.keyCode === 39) {
+    if (e.keyCode === 39 && playerShrek.x < (canvas.width - 70)) {
         playerShrek.x += playerShrek.speed;
     }
-    if (e.keyCode === 40) {
+    if (e.keyCode === 40 && playerShrek.y < (canvas.height - 90)) {
         playerShrek.y += playerShrek.speed;
     }
 }
@@ -57,38 +55,3 @@ const move = e => {
 document.addEventListener('keydown', move)
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// document.addEventListener('keydown', (event) => {
-//     if (event.key === 37){
-//             playerShrek.x -= playerShrek.speed;
-//             console.log('moving left')
-//     }
-//     if (event.key === 38) {
-//             playerShrek.y -= playerShrek.speed;
-//     }
-//     if (event.key === 39){
-//             playerShrek.x += playerShrek.speed;
-//     }
-//     if (event.key === 40){
-//             playerShrek.y += playerShrek.speed;
-//     }
-//     animateShrek()
-//     console.log('move bitch')
-// })
