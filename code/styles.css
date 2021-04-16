@@ -4,11 +4,15 @@
 }
 
 body {
+    background-color: rgb(105,131,57);  
+    margin: 200px;
+}
+
+.width-style {
     font-family: 'RocknRoll One', sans-serif;
     line-height: 2rem;
     width: 60%;
     margin: auto;
-    background-color: rgb(105,131,57);
     
 }
 
@@ -23,7 +27,7 @@ body {
     width: 20%;
 }
 
-.instruction {
+.intro-game {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -32,7 +36,7 @@ body {
     padding: 5%;
 }
 
-.instruction-title {
+.instruction {
     margin-bottom: 20px;
 }
 
@@ -47,7 +51,3 @@ body {
     border-radius: 12px;
 }
 
-.game-canvas {
-    margin: 20px;
-    border: 1px solid blue;
-}
