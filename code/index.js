@@ -27,6 +27,8 @@ const animation = () => {
     imgShrek()
     donkey.update()
     puss.update()
+    collision()
+   
 }
 
 //Creating the player
@@ -100,3 +102,21 @@ class Circle {
 
 const donkey = new Circle(30)
 const puss = new Circle(50)
+
+//Collision detection
+
+const getDistance = (x1, y1, x2, y2) => {
+    const xDistance = x2 - x1;
+    const yDistance = y2 - y1;
+
+    return Math.sqrt(Math.pow(xDistance, 2) + Math.pow(yDistance, 2))
+}
+
+const collision = () => {
+    if(getDistance(playerShrek.x, playerShrek.y, donkey.x, donkey.y) < (donkey.radius)) {
+        console.log('auwwww')
+    }
+    if(getDistance(playerShrek.x, playerShrek.y, puss.x, puss.y) < (puss.radius)) {
+        console.log('noooo')
+    }
+}
