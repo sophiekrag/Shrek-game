@@ -4,15 +4,20 @@
 }
 
 body {
+    font-family: 'RocknRoll One', sans-serif;
+    line-height: 2rem;
     background-color: rgb(105,131,57);  
-    margin: 200px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .width-style {
-    font-family: 'RocknRoll One', sans-serif;
-    line-height: 2rem;
+    
     width: 60%;
-    margin: auto;
+    margin: 0 auto;
     
 }
 
