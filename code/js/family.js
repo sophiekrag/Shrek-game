@@ -1,22 +1,22 @@
 class Family {
     constructor(img, width, height) {
-        this.x = Math.random() * (canvas.width * 3)
-        this.y = Math.random() * (canvas.height * 3)
+        this.x = Math.floor(Math.random() * (1000 - 200) )
+        this.y = Math.floor(Math.random() * (600 - 130) )
         this.img = img
         this.width = width
         this.height = height
-        this.hello = true
+        this.noCollision = true
     }
     update() {
-        this.drawImg()
-        this.collisionFamily()
+        if (this.noCollision) {
+            this.drawImg()
+            this.collisionFamily()
+        }
     }
     drawImg() {
-        if (this.hello) {
-            const familyImg = new Image()
-            familyImg.src = this.img
-            ctx.drawImage(familyImg, this.x, this.y, this.width, this.height)
-        }
+        const familyImg = new Image()
+        familyImg.src = this.img
+        ctx.drawImage(familyImg, this.x, this.y, this.width, this.height)
     }
     getDistance(x1, y1, x2, y2) {
         const xDistance = x2 - x1;
@@ -26,8 +26,9 @@ class Family {
     }
     collisionFamily() {
         if (this.getDistance(playerShrek.x, playerShrek.y, this.x, this.y) < ((this.width + this.height) / 2.5)) {
-            //console.log('Yippie')
-            this.hello = false
+            this.noCollision = false
+            playerShrek.family ++
+            console.log('Yippie')
         }
     }
 }

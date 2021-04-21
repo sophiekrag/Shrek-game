@@ -30,13 +30,15 @@ const animation = () => {
     baby1.update()
     baby2.update()
     baby3.update()
+
     //player
     imgShrek()
     //enemy
+
     donkey.update()
     puss.update()
-    //collision
-    //collideWith()
+    winGame()
+    loseGame()
 }
 
 //Creating the player
@@ -46,6 +48,8 @@ const playerShrek = {
     width: 100,
     height: 130,
     speed: 15,
+    lives: 3,
+    family: 0
 }
 
 //Getting the img for the player
@@ -86,3 +90,27 @@ const baby3 = new Family('../images/daughter-shrek.png', 60, 60)
 const fiona = new Family('../images/fiona.png', 100, 130)
 
 
+//Win the Game
+const winGame = () => {
+    if (playerShrek.family === 4)
+        winImg()
+}
+
+const winImg = () => {
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+    const familyImg = new Image();
+    familyImg.src = "..//images/Shrek_family.jpeg"
+    ctx.drawImage(familyImg, 0, 0, canvas.width, canvas.height)
+}
+
+const loseGame = () => {
+    if (playerShrek.lives === 0)
+        loseImg()
+}
+
+const loseImg = () => {
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+    const losingImg = new Image();
+    losingImg.src = "..//images/LosingShrek.png"
+    ctx.drawImage(losingImg, 0, 0, canvas.width, canvas.height)
+}
