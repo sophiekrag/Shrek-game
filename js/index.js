@@ -62,7 +62,7 @@ const playerShrek = {
 //Getting the img for the player
 const imgShrek = () => {
     const playerImg = new Image();
-    playerImg.src = "..//images/Shrek.png"
+    playerImg.src = "./images/Shrek.png"
     ctx.drawImage(playerImg, playerShrek.x, playerShrek.y, playerShrek.width, playerShrek.height)
 }
 
@@ -86,15 +86,16 @@ document.addEventListener('keydown', move)
 
 
 //Enemy
-const donkey = new Enemy('../images/Donkey.png', 70, 90)
-const puss = new Enemy('../images/PussInBoots.png', 70, 90)
+const donkey = new Enemy('./images/Donkey.png', 70, 90)
+const puss = new Enemy('./images/PussInBoots.png', 70, 90)
 
 
 //Family
-const baby1 = new Family('../images/daughter-shrek.png', 60, 60)
-const baby2 = new Family('../images/daughter-shrek.png', 60, 60)
-const baby3 = new Family('../images/daughter-shrek.png', 60, 60)
-const fiona = new Family('../images/fiona.png', 100, 130)
+const baby1 = new Family('./images/daughter-shrek.png', 60, 60)
+const baby2 = new Family('./images/daughter-shrek.png', 60, 60)
+const baby3 = new Family('./images/daughter-shrek.png', 60, 60)
+const fiona = new Family('./images/fiona.png', 100, 130)
+
 
 //Scoreboard
 const drawScore = () => {
@@ -105,12 +106,13 @@ const drawScore = () => {
 }
 
 
-//Win the Game
+//Win/lose the Game
 const winLose = () => {
     if (playerShrek.family === 4) {
         winImg()
         const message = document.querySelector('.header h1')
         message.textContent = "Well done! You Won!!!"
+        
 
     } else if (playerShrek.lives <= 0) {
         loseImg()
@@ -123,12 +125,12 @@ const winLose = () => {
 
 const winImg = () => {
     const familyImg = new Image();
-    familyImg.src = "..//images/Shrek_family.jpeg"
+    familyImg.src = ".//images/Shrek_family.jpeg"
     ctx.drawImage(familyImg, 0, 0, canvas.width, canvas.height)
 }
 
 const loseImg = () => {
     const losingImg = new Image();
-    losingImg.src = "..//images/LosingShrek.png"
+    losingImg.src = ".//images/LosingShrek.png"
     ctx.drawImage(losingImg, 0, 0, canvas.width, canvas.height)
 }
