@@ -44,7 +44,7 @@ body {
 }
 
 
-#btn-start {
+.btn {
     font-family:'RocknRoll One', sans-serif; 
     font-size: 1.9rem;
     width: 200px;
@@ -53,4 +53,3 @@ body {
     margin: 30px;
     border-radius: 12px;
 }
-

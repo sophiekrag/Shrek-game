@@ -4,7 +4,7 @@ const introSection = document.getElementById('intro')
 startButton.addEventListener("click", () => {
     introSection.style.display = "none"
     greateCanvas()
-    animation()
+    animation()  
 })
 
 //Creating the canvas
@@ -20,7 +20,8 @@ const greateCanvas = () => {
     body.appendChild(canvas)
 }
 
-//Getting the elements inside the canvas
+
+// Getting the elements inside the canvas
 const animation = () => {
     requestAnimationFrame(animation);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -33,13 +34,19 @@ const animation = () => {
 
     //player
     imgShrek()
-    //enemy
 
+    //enemy
     donkey.update()
     puss.update()
-    winGame()
-    loseGame()
+
+    //score
+    drawScore()
+
+    //win/lose
+    winLose()
+
 }
+
 
 //Creating the player
 const playerShrek = {
@@ -89,27 +96,38 @@ const baby2 = new Family('../images/daughter-shrek.png', 60, 60)
 const baby3 = new Family('../images/daughter-shrek.png', 60, 60)
 const fiona = new Family('../images/fiona.png', 100, 130)
 
+//Scoreboard
+const drawScore = () => {
+    ctx.font = "20px Arial";
+    ctx.fillStyle = "#000";
+    ctx.fillText(`Lives: ${playerShrek.lives}`, 8, 20);
+    ctx.fillText(`Family Members: ${playerShrek.family}`, 8, 40);
+}
+
 
 //Win the Game
-const winGame = () => {
-    if (playerShrek.family === 4)
+const winLose = () => {
+    if (playerShrek.family === 4) {
         winImg()
+        const message = document.querySelector('.header h1')
+        message.textContent = "Well done! You Won!!!"
+
+    } else if (playerShrek.lives <= 0) {
+        loseImg()
+        const message = document.querySelector('.header h1')
+        message.textContent = "Loser!!!"
+
+    }
+
 }
 
 const winImg = () => {
-    ctx.clearRect(0, 0, canvas.width, canvas.height)
     const familyImg = new Image();
     familyImg.src = "..//images/Shrek_family.jpeg"
     ctx.drawImage(familyImg, 0, 0, canvas.width, canvas.height)
 }
 
-const loseGame = () => {
-    if (playerShrek.lives === 0)
-        loseImg()
-}
-
 const loseImg = () => {
-    ctx.clearRect(0, 0, canvas.width, canvas.height)
     const losingImg = new Image();
     losingImg.src = "..//images/LosingShrek.png"
     ctx.drawImage(losingImg, 0, 0, canvas.width, canvas.height)

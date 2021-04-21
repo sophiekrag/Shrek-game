@@ -1,21 +1,18 @@
 //Creating circles to make puss and donkey move around the screen
 class Enemy {
     constructor(img, width, height) {
-        this.x = Math.random() * canvas.width
-        this.y = Math.random() * (canvas.height - playerShrek.height)
+        this.x = Math.random() * 200
+        this.y = Math.random() * 200
         this.dx = (Math.random() - 0.5) * 10
         this.dy = (Math.random() - 0.5) * 10
         this.img = img
         this.width = width
         this.height = height
-        // this.noCollision = undefined
-        // this.count = 0
     }
     update() {
         this.drawImg()
         this.move()
         this.collisionEnemy()
-
     }
     drawImg() {
         const enemyImg = new Image()
@@ -42,9 +39,8 @@ class Enemy {
     }
     collisionEnemy() {
         if (this.getDistance(playerShrek.x, playerShrek.y, this.x, this.y) < ((this.width + this.height) / 2.5)) {
-            // this.noCollision = false
-            this.x = Math.random() * (canvas.width - this.width)
-            this.y = Math.random() * (canvas.height - playerShrek.height)
+            this.x = Math.random() * 200
+            this.y = Math.random() * 200
             playerShrek.lives--
             playerShrek.x = 500
             playerShrek.y = 470
