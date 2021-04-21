@@ -94,7 +94,7 @@ const puss = new Enemy('./images/PussInBoots.png', 70, 90)
 const baby1 = new Family('./images/daughter-shrek.png', 60, 60)
 const baby2 = new Family('./images/daughter-shrek.png', 60, 60)
 const baby3 = new Family('./images/daughter-shrek.png', 60, 60)
-const fiona = new Family('./images/fiona.png', 100, 130)
+const fiona = new Family('./images/Fiona.png', 100, 130)
 
 
 //Scoreboard
