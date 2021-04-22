@@ -1,5 +1,6 @@
 const startButton = document.getElementById('btn-start');
 const introSection = document.getElementById('intro')
+const refresh = document.getElementById('refresh')
 
 startButton.addEventListener("click", () => {
     introSection.style.display = "none"
@@ -20,40 +21,31 @@ const createCanvas = () => {
     body.appendChild(canvas)
 }
 
+//Background image
 const backgroundImg = () => {
     const background = new Image()
-    background.src = "./images/swamp1.jpg"
+    background.src = "./images/swamp.png"
     ctx.drawImage(background, 0, 0, canvas.width, canvas.height)
 }
 
-let gameStart = true
+
 // Getting the elements inside the canvas
+let gameStart = true
+
 const animation = () => {
     if (gameStart) {
+
         requestAnimationFrame(animation);
         ctx.clearRect(0, 0, canvas.width, canvas.height);
+
         backgroundImg()
-        //family
-        fiona.update()
-        baby1.update()
-        baby2.update()
-        baby3.update()
-
-        //player
+        family()
         imgShrek()
-
-        //enemy
-        donkey.update()
-        puss.update()
-
-        //score
+        enemy()
         drawScore()
     }
-
-    //win/lose
-    winLose()
-
-
+    winGame()
+    loseGame()
 }
 
 
@@ -63,7 +55,7 @@ const playerShrek = {
     y: 470,
     width: 100,
     height: 130,
-    speed: 15,
+    speed: 20,
     lives: 3,
     family: 0
 }
@@ -80,7 +72,7 @@ const move = e => {
     if (e.keyCode === 37 && playerShrek.x > 0) {
         playerShrek.x -= playerShrek.speed;
     }
-    if (e.keyCode === 38 && playerShrek.y > 0) {
+    if (e.keyCode === 38 && playerShrek.y > 0 + playerShrek.speed) {
         playerShrek.y -= playerShrek.speed;
     }
     if (e.keyCode === 39 && playerShrek.x < (canvas.width - 100)) {
@@ -98,50 +90,65 @@ document.addEventListener('keydown', move)
 const donkey = new Enemy('./images/Donkey.png', 70, 90)
 const puss = new Enemy('./images/PussInBoots.png', 70, 90)
 
+const enemy = () => {
+    donkey.update()
+    puss.update()
+}
+
 
 //Family
-const baby1 = new Family('./images/daughter-shrek.png', 60, 60)
-const baby2 = new Family('./images/daughter-shrek.png', 60, 60)
-const baby3 = new Family('./images/daughter-shrek.png', 60, 60)
+const baby1 = new Family('./images/baby1.png', 60, 60)
+const baby2 = new Family('./images/baby2.png', 60, 60)
+const baby3 = new Family('./images/baby3.png', 60, 60)
 const fiona = new Family('./images/Fiona.png', 100, 130)
+
+const family = () => {
+    baby1.update()
+    baby2.update()
+    baby3.update()
+    fiona.update()
+}
 
 
 //Scoreboard
 const drawScore = () => {
-    ctx.font = "20px Arial";
+    ctx.font = "24px Arial";
     ctx.fillStyle = "#000";
     ctx.fillText(`Lives: ${playerShrek.lives}`, 8, 20);
     ctx.fillText(`Family Members: ${playerShrek.family}`, 8, 40);
 }
 
 
-//Win/lose the Game
-const winLose = () => {
+//Win the game
+const winGame = () => {
     if (playerShrek.family === 4) {
         winImg()
         const message = document.querySelector('.header h1')
         message.textContent = "You Won!!! Family Time!"
         gameStart = false
+    }
+}
 
-    } else if (playerShrek.lives <= 0) {
+const winImg = () => {
+    const familyImg = new Image();
+    familyImg.src = "./images/familyTime.png"
+    ctx.drawImage(familyImg, 0, 0, canvas.width, canvas.height)
+}
+
+
+//Lose the game
+const loseGame = () => {
+    if (playerShrek.lives === 0) {
         loseImg()
         const message = document.querySelector('.header h1')
         message.textContent = "Loser!!!"
         gameStart = false
-
     }
-}
-
-
-const winImg = () => {
-    const familyImg = new Image();
-    familyImg.src = ".//images/Shrek_family.jpeg"
-    ctx.drawImage(familyImg, 0, 0, canvas.width, canvas.height)
 }
 
 const loseImg = () => {
     const losingImg = new Image();
-    losingImg.src = ".//images/LosingShrek.png"
+    losingImg.src = "./images/LosingShrek.png"
     ctx.drawImage(losingImg, 0, 0, canvas.width, canvas.height)
 }
 
