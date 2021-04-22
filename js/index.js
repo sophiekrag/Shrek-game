@@ -9,6 +9,7 @@ const message = document.querySelector('.header h1')
 
 let familyArr = []
 let raf = null
+let animate = true // to make sure the animation stops when you win or lose
 
 resetButton.style.display = 'none'
 
@@ -21,13 +22,17 @@ startButton.addEventListener("click", () => {
 //Reset button
 resetButton.addEventListener('click', () => {
     cancelAnimationFrame(raf) 
-    console.log('clicked')
+
     playerShrek.x = 500
     playerShrek.y = 470
     playerShrek.lives = 3
     playerShrek.family = 0
+
     resetButton.style.display = 'none'
     message.textContent = "Shrek needs some family time!"
+
+    animate = true
+
     startGame()  
 })
 
@@ -57,7 +62,7 @@ const startGame = () => {
 
 // Getting the elements inside the canvas
 const animation = () => {
-
+    if (animate) {
     raf = requestAnimationFrame(animation);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -66,8 +71,10 @@ const animation = () => {
     imgShrek()
     enemy()
     drawScore()
+    }
     winGame()
     loseGame()
+    
 }
 
 //Background image
@@ -126,7 +133,6 @@ const enemy = () => {
 
 const family = () => {
     familyArr.forEach(fam => fam.update())
-    console.log('called fam')
 }
 
 
@@ -160,6 +166,7 @@ const gameStatus = (msg, img) => {
     const imge = new Image();
     imge.src = img
     ctx.drawImage(imge, 0, 0, canvas.width, canvas.height)
+    animate = false
 }
 
 

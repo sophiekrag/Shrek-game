@@ -23,7 +23,6 @@ class Family {
             playerShrek.x + playerShrek.width > this.x &&
             playerShrek.y < this.y + this.height &&
             playerShrek.y + playerShrek.width > this.y) {
-            console.log('collide fam', this.img)
             
             this.noCollision = false
             playerShrek.family++
