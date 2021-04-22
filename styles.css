@@ -6,6 +6,9 @@
 body {
     font-family: 'RocknRoll One', sans-serif;
     line-height: 2rem;
+    background-image: url(./images/swamp.png);
+    background-repeat: no-repeat;
+    background-size: cover;
     background-color: rgb(105,131,57);  
     height: 100vh;
     display: flex;
