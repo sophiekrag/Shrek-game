@@ -31,14 +31,18 @@ class Enemy {
         this.x += this.dx
         this.y += this.dy
     }
-    getDistance(x1, y1, x2, y2) {
-        const xDistance = x2 - x1;
-        const yDistance = y2 - y1;
+    // getDistance(x1, y1, x2, y2) {
+    //     const xDistance = x2 - x1;
+    //     const yDistance = y2 - y1;
 
-        return Math.sqrt(Math.pow(xDistance, 2) + Math.pow(yDistance, 2))
-    }
+    //     return Math.sqrt(Math.pow(xDistance, 2) + Math.pow(yDistance, 2))
+    // }
     collisionEnemy() {
-        if (this.getDistance(playerShrek.x, playerShrek.y, this.x, this.y) < ((this.width + this.height) / 2.5)) {
+        // if (this.getDistance(playerShrek.x, playerShrek.y, this.x, this.y) < ((this.width + this.height) / 2.5)) 
+        if (playerShrek.x < this.x + this.width &&
+            playerShrek.x + playerShrek.width > this.x &&
+            playerShrek.y < this.y + this.height &&
+            playerShrek.y + playerShrek.width > this.y){
             this.x = Math.random() * 200
             this.y = Math.random() * 200
             playerShrek.lives--

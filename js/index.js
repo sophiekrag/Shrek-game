@@ -3,15 +3,15 @@ const introSection = document.getElementById('intro')
 
 startButton.addEventListener("click", () => {
     introSection.style.display = "none"
-    greateCanvas()
-    animation()  
+    createCanvas()
+    animation()
 })
 
 //Creating the canvas
 const canvas = document.createElement('canvas');
 const ctx = canvas.getContext('2d')
 
-const greateCanvas = () => {
+const createCanvas = () => {
     canvas.id = 'gameCanvas';
     canvas.width = 1000;
     canvas.height = 600;
@@ -20,30 +20,39 @@ const greateCanvas = () => {
     body.appendChild(canvas)
 }
 
+const backgroundImg = () => {
+    const background = new Image()
+    background.src = "./images/swamp1.jpg"
+    ctx.drawImage(background, 0, 0, canvas.width, canvas.height)
+}
 
+let gameStart = true
 // Getting the elements inside the canvas
 const animation = () => {
-    requestAnimationFrame(animation);
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    if (gameStart) {
+        requestAnimationFrame(animation);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        backgroundImg()
+        //family
+        fiona.update()
+        baby1.update()
+        baby2.update()
+        baby3.update()
 
-    //family
-    fiona.update()
-    baby1.update()
-    baby2.update()
-    baby3.update()
+        //player
+        imgShrek()
 
-    //player
-    imgShrek()
+        //enemy
+        donkey.update()
+        puss.update()
 
-    //enemy
-    donkey.update()
-    puss.update()
-
-    //score
-    drawScore()
+        //score
+        drawScore()
+    }
 
     //win/lose
     winLose()
+
 
 }
 
@@ -111,17 +120,18 @@ const winLose = () => {
     if (playerShrek.family === 4) {
         winImg()
         const message = document.querySelector('.header h1')
-        message.textContent = "Well done! You Won!!!"
-        
+        message.textContent = "You Won!!! Family Time!"
+        gameStart = false
 
     } else if (playerShrek.lives <= 0) {
         loseImg()
         const message = document.querySelector('.header h1')
         message.textContent = "Loser!!!"
+        gameStart = false
 
     }
-
 }
+
 
 const winImg = () => {
     const familyImg = new Image();
@@ -134,3 +144,4 @@ const loseImg = () => {
     losingImg.src = ".//images/LosingShrek.png"
     ctx.drawImage(losingImg, 0, 0, canvas.width, canvas.height)
 }
+
