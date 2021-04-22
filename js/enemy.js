@@ -36,7 +36,7 @@ class Enemy {
             playerShrek.x + playerShrek.width > this.x &&
             playerShrek.y < this.y + this.height &&
             playerShrek.y + playerShrek.width > this.y) {
-
+    
             this.x = Math.random() * 200
             this.y = Math.random() * 200
             playerShrek.lives--

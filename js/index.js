@@ -1,17 +1,42 @@
 const startButton = document.getElementById('btn-start');
+const resetButton = document.getElementById('btn-reset');
 const introSection = document.getElementById('intro')
-const refresh = document.getElementById('refresh')
 
+
+const canvas = document.createElement('canvas');
+const ctx = canvas.getContext('2d')
+const message = document.querySelector('.header h1')
+
+let familyArr = []
+let raf = null
+let animate = true // to make sure the animation stops when you win or lose
+
+resetButton.style.display = 'none'
+
+//Start button
 startButton.addEventListener("click", () => {
     introSection.style.display = "none"
-    createCanvas()
-    animation()
+    startGame()
+})
+
+//Reset button
+resetButton.addEventListener('click', () => {
+    cancelAnimationFrame(raf) 
+
+    playerShrek.x = 500
+    playerShrek.y = 470
+    playerShrek.lives = 3
+    playerShrek.family = 0
+
+    resetButton.style.display = 'none'
+    message.textContent = "Shrek needs some family time!"
+
+    animate = true
+
+    startGame()  
 })
 
 //Creating the canvas
-const canvas = document.createElement('canvas');
-const ctx = canvas.getContext('2d')
-
 const createCanvas = () => {
     canvas.id = 'gameCanvas';
     canvas.width = 1000;
@@ -21,33 +46,43 @@ const createCanvas = () => {
     body.appendChild(canvas)
 }
 
+//Start the game
+const startGame = () => {
+    createCanvas()
+    animation()
+    
+    const baby1 = new Family('./images/baby1.png', 60, 60, true)
+    const baby2 = new Family('./images/baby2.png', 60, 60, true)
+    const baby3 = new Family('./images/baby3.png', 60, 60, true)
+    const fiona = new Family('./images/Fiona.png', 100, 130, true)
+
+    familyArr = [baby1, baby2, baby3, fiona]
+}
+
+
+// Getting the elements inside the canvas
+const animation = () => {
+    if (animate) {
+    raf = requestAnimationFrame(animation);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    backgroundImg()
+    family()
+    imgShrek()
+    enemy()
+    drawScore()
+    }
+    winGame()
+    loseGame()
+    
+}
+
 //Background image
 const backgroundImg = () => {
     const background = new Image()
     background.src = "./images/swamp.png"
     ctx.drawImage(background, 0, 0, canvas.width, canvas.height)
 }
-
-
-// Getting the elements inside the canvas
-let gameStart = true
-
-const animation = () => {
-    if (gameStart) {
-
-        requestAnimationFrame(animation);
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-        backgroundImg()
-        family()
-        imgShrek()
-        enemy()
-        drawScore()
-    }
-    winGame()
-    loseGame()
-}
-
 
 //Creating the player
 const playerShrek = {
@@ -57,7 +92,7 @@ const playerShrek = {
     height: 130,
     speed: 20,
     lives: 3,
-    family: 0
+    family: 0,
 }
 
 //Getting the img for the player
@@ -96,17 +131,8 @@ const enemy = () => {
 }
 
 
-//Family
-const baby1 = new Family('./images/baby1.png', 60, 60)
-const baby2 = new Family('./images/baby2.png', 60, 60)
-const baby3 = new Family('./images/baby3.png', 60, 60)
-const fiona = new Family('./images/Fiona.png', 100, 130)
-
 const family = () => {
-    baby1.update()
-    baby2.update()
-    baby3.update()
-    fiona.update()
+    familyArr.forEach(fam => fam.update())
 }
 
 
@@ -118,37 +144,29 @@ const drawScore = () => {
     ctx.fillText(`Family Members: ${playerShrek.family}`, 8, 40);
 }
 
-
 //Win the game
 const winGame = () => {
     if (playerShrek.family === 4) {
-        winImg()
-        const message = document.querySelector('.header h1')
-        message.textContent = "You Won!!! Family Time!"
-        gameStart = false
+        gameStatus("You Won!!! Family Time!", "../images/familyTime.png")
+       
     }
 }
-
-const winImg = () => {
-    const familyImg = new Image();
-    familyImg.src = "./images/familyTime.png"
-    ctx.drawImage(familyImg, 0, 0, canvas.width, canvas.height)
-}
-
 
 //Lose the game
 const loseGame = () => {
-    if (playerShrek.lives === 0) {
-        loseImg()
-        const message = document.querySelector('.header h1')
-        message.textContent = "Loser!!!"
-        gameStart = false
+    if (playerShrek.lives <= 0) {  
+        gameStatus("Loser!!!", "./images/LosingShrek.png")
     }
 }
 
-const loseImg = () => {
-    const losingImg = new Image();
-    losingImg.src = "./images/LosingShrek.png"
-    ctx.drawImage(losingImg, 0, 0, canvas.width, canvas.height)
+//Game status
+const gameStatus = (msg, img) => {
+    resetButton.style.display = 'block'
+    message.textContent = msg 
+    const imge = new Image();
+    imge.src = img
+    ctx.drawImage(imge, 0, 0, canvas.width, canvas.height)
+    animate = false
 }
+
 

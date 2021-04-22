@@ -1,11 +1,11 @@
 class Family {
-    constructor(img, width, height) {
+    constructor(img, width, height, hasCollision) {
         this.x = Math.random() * (1000 - 100) 
         this.y = Math.random() * (470 - 100) 
         this.img = img
         this.width = width
         this.height = height
-        this.noCollision = true
+        this.noCollision = hasCollision
     }
     update() {
         if (this.noCollision) {
@@ -23,9 +23,9 @@ class Family {
             playerShrek.x + playerShrek.width > this.x &&
             playerShrek.y < this.y + this.height &&
             playerShrek.y + playerShrek.width > this.y) {
-
+            
             this.noCollision = false
-            playerShrek.family ++
+            playerShrek.family++
         }
     }
 }
