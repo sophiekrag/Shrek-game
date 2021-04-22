@@ -147,7 +147,7 @@ const drawScore = () => {
 //Win the game
 const winGame = () => {
     if (playerShrek.family === 4) {
-        gameStatus("You Won!!! Family Time!", "../images/familyTime.png")
+        gameStatus("You Won!!! Family Time!", "./images/familyTime.png")
        
     }
 }
