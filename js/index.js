@@ -150,7 +150,7 @@ const winGame = () => {
 
 //Lose the game
 const loseGame = () => {
-    if (playerShrek.lives <= 0) {  
+    if (playerShrek.lives === 0) {  
         gameStatus("Loser!!!", "./images/LosingShrek.png")
     }
 }
