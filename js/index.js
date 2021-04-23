@@ -8,6 +8,7 @@ const ctx = canvas.getContext('2d')
 const message = document.querySelector('.header h1')
 
 let familyArr = []
+let enemyArr = []
 let raf = null
 let animate = true // to make sure the animation stops when you win or lose
 
@@ -57,6 +58,11 @@ const startGame = () => {
     const fiona = new Family('./images/Fiona.png', 100, 130, true)
 
     familyArr = [baby1, baby2, baby3, fiona]
+
+    const donkey = new Enemy('./images/Donkey.png', 70, 90)
+    const puss = new Enemy('./images/PussInBoots.png', 70, 90)
+
+    enemyArr = [donkey, puss]
 }
 
 
@@ -67,14 +73,14 @@ const animation = () => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     backgroundImg()
-    family()
+    character(familyArr)
     imgShrek()
-    enemy()
+    character(enemyArr)
     drawScore()
     }
+
     winGame()
     loseGame()
-    
 }
 
 //Background image
@@ -121,18 +127,9 @@ const move = e => {
 document.addEventListener('keydown', move)
 
 
-//Enemy
-const donkey = new Enemy('./images/Donkey.png', 70, 90)
-const puss = new Enemy('./images/PussInBoots.png', 70, 90)
-
-const enemy = () => {
-    donkey.update()
-    puss.update()
-}
-
-
-const family = () => {
-    familyArr.forEach(fam => fam.update())
+// Drawing the family and enenmy character
+const character = (arr) => {
+    arr.forEach(char => char.update())
 }
 
 
@@ -148,7 +145,6 @@ const drawScore = () => {
 const winGame = () => {
     if (playerShrek.family === 4) {
         gameStatus("You Won!!! Family Time!", "./images/familyTime.png")
-       
     }
 }
 
