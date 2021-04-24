@@ -18,6 +18,8 @@ resetButton.style.display = 'none'
 startButton.addEventListener("click", () => {
     introSection.style.display = "none"
     startGame()
+    loseGame()
+    winGame()
 })
 
 //Reset button
