@@ -14,17 +14,21 @@ let animate = true // to make sure the animation stops when you win or lose
 
 resetButton.style.display = 'none'
 
+let music = document.createElement('audio')
+music.src = "./Smash Mouth.mp3"
+music.loop = true
+
+
 //Start button
 startButton.addEventListener("click", () => {
     introSection.style.display = "none"
     startGame()
-    loseGame()
-    winGame()
+
 })
 
 //Reset button
 resetButton.addEventListener('click', () => {
-    cancelAnimationFrame(raf) 
+    cancelAnimationFrame(raf)
 
     playerShrek.x = 500
     playerShrek.y = 470
@@ -36,7 +40,7 @@ resetButton.addEventListener('click', () => {
 
     animate = true
 
-    startGame()  
+    startGame()
 })
 
 //Creating the canvas
@@ -53,7 +57,7 @@ const createCanvas = () => {
 const startGame = () => {
     createCanvas()
     animation()
-    
+   
     const baby1 = new Family('./images/baby1.png', 60, 60, true)
     const baby2 = new Family('./images/baby2.png', 60, 60, true)
     const baby3 = new Family('./images/baby3.png', 60, 60, true)
@@ -71,14 +75,14 @@ const startGame = () => {
 // Getting the elements inside the canvas
 const animation = () => {
     if (animate) {
-    raf = requestAnimationFrame(animation);
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    backgroundImg()
-    character(familyArr)
-    imgShrek()
-    character(enemyArr)
-    drawScore()
+        raf = requestAnimationFrame(animation);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        music.play()
+        backgroundImg()
+        character(familyArr)
+        imgShrek()
+        character(enemyArr)
+        drawScore()
     }
 
     winGame()
@@ -147,12 +151,13 @@ const drawScore = () => {
 const winGame = () => {
     if (playerShrek.family === 4) {
         gameStatus("You Won!!! Family Time!", "./images/familyTime.png")
+
     }
 }
 
 //Lose the game
 const loseGame = () => {
-    if (playerShrek.lives === 0) {  
+    if (playerShrek.lives === 0) {
         gameStatus("Loser!!!", "./images/LosingShrek.png")
     }
 }
@@ -160,11 +165,9 @@ const loseGame = () => {
 //Game status
 const gameStatus = (msg, img) => {
     resetButton.style.display = 'block'
-    message.textContent = msg 
+    message.textContent = msg
     const imge = new Image();
     imge.src = img
     ctx.drawImage(imge, 0, 0, canvas.width, canvas.height)
     animate = false
 }
-
-
