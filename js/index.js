@@ -41,6 +41,7 @@ resetButton.addEventListener('click', () => {
     animate = true
 
     startGame()
+    music.pause()
 })
 
 //Creating the canvas
@@ -157,13 +158,15 @@ const winGame = () => {
 
 //Lose the game
 const loseGame = () => {
-    if (playerShrek.lives === 0) {
+    if (playerShrek.lives <= 0) {
+        console.log('player has lost')
         gameStatus("Loser!!!", "./images/LosingShrek.png")
     }
 }
 
 //Game status
 const gameStatus = (msg, img) => {
+    console.log('gamestatus', img)
     resetButton.style.display = 'block'
     message.textContent = msg
     const imge = new Image();
